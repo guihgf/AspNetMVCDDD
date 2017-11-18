@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using System.Linq;
+using UpFinancas.Domain.Entities;
+
+namespace Upfinancas.MVC.ViewModel
+{
+    public class EventoViewModel
+    {
+        public EventoViewModel() {
+            MontarListaTipos();
+            DataLancamento = DateTime.Now;
+        }
+
+        public EventoViewModel(IEnumerable<Conta> contas)
+        {
+            MontarListaContas(contas);
+            MontarListaTipos();
+            DataLancamento = DateTime.Now;
+        }
+        public int? Id { get; set; }
+
+        [Required(ErrorMessage = "Digite o nome do evento.")]
+        [StringLength(150, MinimumLength = 5, ErrorMessage = "Evento deve possuir entre 5 e 150 caracteres.")]
+        public string Descricao { get; set; }
+
+        [Range((int)ETipoEvento.Despesa,(int)ETipoEvento.Receita,ErrorMessage="Tipo de evento inválido.")]
+        public int Tipo { get; set; }
+
+        [Required(ErrorMessage = "Digite o valor do evento.")]
+        [Range(0.0, Double.MaxValue,ErrorMessage ="Valor deve ser maior que 0 e/ou válido")]
+        public double Valor { get; set; }
+
+        [Required(ErrorMessage = "Valor deve ser no mínimo 0.")]
+        [Range(0.0, Double.MaxValue, ErrorMessage = "Valor deve ser no mínimo 0.")]
+        public double ValorJuros { get; set; }
+
+        [Required(ErrorMessage = "Valor deve ser no mínimo 0.")]
+        [Range(0.0, Double.MaxValue, ErrorMessage = "Valor deve ser no mínimo 0.")]
+        public double ValorDesconto { get; set; }
+
+        [Required(ErrorMessage = "Informe a data de lançamento.")]
+        //[DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date,ErrorMessage ="Formato de data inválido.")]
+        public DateTime DataLancamento { get; set; }
+
+        [DataType(DataType.Date, ErrorMessage = "Formato de data inválido.")]
+        public DateTime? DataVencimento { get; set; }
+
+        [DataType(DataType.Date, ErrorMessage = "Formato de data inválido.")]
+        public DateTime? DataPagamento { get; set; }
+
+        [StringLength(300, MinimumLength = 5, ErrorMessage = "Observação deve possuir entre 5 e 150 caracteres.")]
+        public string Observacao { get; set; }
+
+        [Required(ErrorMessage = "Informe uma conta.")]
+        public int ContaId { get; set; }
+
+        public virtual Conta Conta { get; private set; }
+
+        public IEnumerable<SelectListItem> Contas { get; private set; }
+
+        public IEnumerable<SelectListItem> Tipos { get; private set; }
+
+        public string GetTipo()
+        {
+            return Tipo == (int)ETipoEvento.Despesa ? "Despesas" : "Receitas";
+        }
+
+        public void MontarListaContas(IEnumerable<Conta> contas, int idSelecionado=0)
+        {
+            Contas=new SelectList(contas, "Id", "Nome", idSelecionado==0? Enumerable.FirstOrDefault(contas).Id:idSelecionado);
+        }
+
+        public void MontarListaTipos(int idSelecionado = 0)
+        {
+            Tipos = new List<SelectListItem>(){
+                    new SelectListItem() {Text="Despesa", Value=((int)ETipoEvento.Despesa).ToString()},
+                    new SelectListItem() {Text="Receita", Value=((int)ETipoEvento.Receita).ToString()}
+            };
+        }
+    }
+}

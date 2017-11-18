@@ -1,0 +1,167 @@
+﻿@model IEnumerable< Upfinancas.MVC.ViewModel.EventoViewModel > 
+@{
+    ViewBag.Title = "Eventos";
+}
+<h3 class="page-title">
+    Eventos <small>lançamentos</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            Eventos
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <a href="@Url.Action("Cadastrar","Evento")" class="btn green btn-fit-height"><i class="fa  fa-plus"></i> Novo</a>
+        </div>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN VALIDATION STATES-->
+        <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-ticket"></i>Eventos
+                </div>
+            </div>
+            <div class="portlet-body ">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model.Any())
+                        {
+                            <table class="table table-striped text-center" id="table-viewer">
+                                <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Evento</th>
+                                    <th>Tipo</th>
+                                    <th>Dt. Lançamento</th>
+                                    <th>Dt. Vencimento</th>
+                                    <th>Valor</th>
+                                    <th>Visualizar</th>
+                                    <th>Excluir</th>
+                                </tr>
+                                </thead>
+                                @foreach (var row in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => row.Id) 
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => row.Descricao) 
+                                        </td>
+                                        <td>
+                                            @row.GetTipo()
+                                        </td>
+                                        <td>
+                                            @(row.GetDataLancamentoPtBr())
+                                        </td>
+                                        <td>
+                                            @(row.GetDataVencimentoPtBr())
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => row.Valor)
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Editar","Evento", new { eventoId = row.Id })" class="btn green btn-xs"><i class="fa fa-search" title="Visualizar"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("Excluir","Evento",new { eventoId=row.Id})" class="btn red btn-xs"><i class="fa fa-remove" title="Excluir"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                              
+                            </table>
+                        }
+                        else
+                        {
+                            <p class="alert alert-borderless">
+                                Não existem registros cadastrados.
+                            </p>
+                        }
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END VALIDATION STATES-->
+    </div>
+</div>
+<script type="text/javascript">
+    var Inside = function () {
+        var handleTable = function () {
+            $('table').dataTable({
+
+                // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+                // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js).
+                // So when dropdowns used the scrollable div should be removed.
+                //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+
+                "lengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "Todos"] // change per page values here
+                ],
+
+                // Or you can use remote translation file
+                //"language": {
+                //   url: '//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Portuguese.json'
+                //},
+
+                // set the initial value
+                "pageLength": 10,
+
+                "language": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                },
+                "columnDefs": [{ // set default column settings
+                    'orderable': true,
+                    'targets': [0]
+                }, {
+                    "searchable": true,
+                    "targets": [0]
+                },
+                    { "type": 'date-eu', "targets": [2] }
+                ],
+                "order": [
+                    [0, "desc"]
+                ] // set first column as a default sort by asc
+            });
+        }
+        return {
+            init: function () {
+                handleTable();
+            }
+        };
+    }();
+</script>

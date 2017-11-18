@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EBFB48CC-054B-41D0-A35F-ED455C8CFABF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UpFinancas.Infra.Data</RootNamespace>
+    <AssemblyName>UpFinancas.Infra.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Context\UpFinancasContext.cs" />
+    <Compile Include="EntityConfig\FormaConfig.cs" />
+    <Compile Include="EntityConfig\CategoriaConfig.cs" />
+    <Compile Include="EntityConfig\PessoaConfig.cs" />
+    <Compile Include="EntityConfig\EventoConfig.cs" />
+    <Compile Include="EntityConfig\ContaConfig.cs" />
+    <Compile Include="EntityConfig\UsuarioConfig.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Migrations\201602271533247_base_tables.cs" />
+    <Compile Include="Migrations\201602271533247_base_tables.Designer.cs">
+      <DependentUpon>201602271533247_base_tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603012356549_model_evento.cs" />
+    <Compile Include="Migrations\201603012356549_model_evento.Designer.cs">
+      <DependentUpon>201603012356549_model_evento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604120111323_add_email_unico.cs" />
+    <Compile Include="Migrations\201604120111323_add_email_unico.Designer.cs">
+      <DependentUpon>201604120111323_add_email_unico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604130040029_model_pessoa.cs" />
+    <Compile Include="Migrations\201604130040029_model_pessoa.Designer.cs">
+      <DependentUpon>201604130040029_model_pessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604302023248_add_models_formas_e_categorias.cs" />
+    <Compile Include="Migrations\201604302023248_add_models_formas_e_categorias.Designer.cs">
+      <DependentUpon>201604302023248_add_models_formas_e_categorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FormaRepository.cs" />
+    <Compile Include="Repositories\EventoRepository.cs" />
+    <Compile Include="Repositories\ContaRepository.cs" />
+    <Compile Include="Repositories\CategoriaRepository.cs" />
+    <Compile Include="Repositories\PessoaRepository.cs" />
+    <Compile Include="Repositories\UsuarioRepository.cs" />
+    <Compile Include="Services\MailService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UpFinancas.Domain\UpFinancas.Domain.csproj">
+      <Project>{e52f715a-d6cd-4c77-8a5e-aed5420f6618}</Project>
+      <Name>UpFinancas.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201602271533247_base_tables.resx">
+      <DependentUpon>201602271533247_base_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603012356549_model_evento.resx">
+      <DependentUpon>201603012356549_model_evento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604120111323_add_email_unico.resx">
+      <DependentUpon>201604120111323_add_email_unico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604130040029_model_pessoa.resx">
+      <DependentUpon>201604130040029_model_pessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604302023248_add_models_formas_e_categorias.resx">
+      <DependentUpon>201604302023248_add_models_formas_e_categorias.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

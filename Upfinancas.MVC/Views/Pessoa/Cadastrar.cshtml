@@ -1,0 +1,136 @@
+﻿@model Upfinancas.MVC.ViewModel.PessoaViewModel
+@{
+    ViewBag.Title = "Pessoas(fontes)";
+}
+<h3 class="page-title">
+    Pessoas <small>fontes</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Pessoa")">Pessoa</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            Nova Pessoa
+        </li>
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Cadastrar", "Pessoa", FormMethod.Post, new { @id = "form1"}))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="portlet box grey-cascade">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa  fa-plus"></i> Cadastrar nova fonte
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="form-body form-vertical">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Nome: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Telefone:
+                                        </label>
+                                        @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Celular:
+                                        </label>
+                                        @Html.EditorFor(model => model.Celular, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Celular, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            E-mail:
+                                        </label>
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Rua:
+                                        </label>
+                                        @Html.EditorFor(model => model.Rua, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Rua, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Número:
+                                        </label>
+                                        @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Bairro:
+                                        </label>
+                                        @Html.EditorFor(model => model.Bairro, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Bairro, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                        <label>
+                                            Cidade:
+                                        </label>
+                                        @Html.EditorFor(model => model.Cidade, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        <label>
+                                            Complemento:
+                                        </label>
+                                        @Html.TextAreaFor(model => model.Complemento,  new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn green">Salvar</button>
+                                        @Html.ActionLink("Volta", "Index", "Pessoa", null, new { @class = "btn default" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var Inside = function () {
+        return {
+            init: function () {
+            }
+        };
+    }();
+</script>

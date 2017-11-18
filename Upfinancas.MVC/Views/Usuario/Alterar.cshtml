@@ -1,0 +1,104 @@
+﻿@model Upfinancas.MVC.ViewModel.UsuarioViewModel
+@{
+    ViewBag.Title = "Meus dados";
+}
+<h3 class="page-title">
+    Usuário <small>meus dados</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Usuario")">Meus dados</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            Alterar dados
+        </li>
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Alterar", "Usuario", FormMethod.Post, new { @id = "form1", @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="portlet box grey-cascade">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa  fa-plus"></i> Alterar meus dados
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="form-body form-vertical">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                            Nome: <span class="text-danger">* </span>
+                                        </label>
+                                        <div class="col-md-4 col-sm-5 col-xs-11">
+                                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                            E-mail: <span class="text-danger">* </span>
+                                        </label>
+                                        <div class="col-md-4 col-sm-5 col-xs-11">
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                            Confirme E-mail: <span class="text-danger">* </span>
+                                        </label>
+                                        <div class="col-md-4 col-sm-5 col-xs-11">
+                                            @Html.EditorFor(model => model.ConfirmeEmail, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.ConfirmeEmail, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                            Senha: <span class="text-danger">* </span>
+                                        </label>
+                                        <div class="col-md-4 col-sm-5 col-xs-11">
+                                            @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control", @Value = "" } })
+                                            @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+                                         </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                            Confirme a senha: <span class="text-danger">* </span>
+                                        </label>
+                                        <div class="col-md-4 col-sm-5 col-xs-11">
+                                            @Html.EditorFor(model => model.ConfirmarSenha, new { htmlAttributes = new { @class = "form-control",@Value=""} })
+                                            @Html.ValidationMessageFor(model => model.ConfirmarSenha, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn green">Salvar</button>
+                                        @Html.ActionLink("Cancelar", "Index", "Evento", null, new { @class = "btn default" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

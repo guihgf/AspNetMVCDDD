@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Up Finanças - O seu controle financeiro.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!--<meta http-equiv="Content-type" content="text/html; charset=utf-8">-->
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"> -->
+    @Styles.Render("~/Content/css/font-awesome/css/font-awesome.min.css")
+    @Styles.Render("~/Content/css/simple-line-icons/simple-line-icons.min.css")
+    @Styles.Render("~/Content/css/bootstrap.min.css")
+    @Styles.Render("~/Content/css/uniform.default.css")
+    @Styles.Render("~/Content/css/bootstrap-switch.min.css")
+    <!-- END GLOBAL MANDATORY STYLES -->
+    @Styles.Render("~/Content/css/select2.css")
+    @Styles.Render("~/Content/js/lib/datatables/extensions/Scroller/css/dataTables.scroller.min.css")
+    @Styles.Render("~/Content/js/lib/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css")
+    @Styles.Render("~/Content/js/lib/datatables/plugins/bootstrap/dataTables.bootstrap.css")
+    @Styles.Render("~/Content/js/lib/bootstrap-datepicker/css/bootstrap-datepicker3.min.css")
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/Content/css/components-md.css" id="style_components" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css/components-md.css")
+    @Styles.Render("~/Content/css/plugins-md.css")
+    @Styles.Render("~/Content/css/layout.css")
+    @Styles.Render("~/Content/css/login.css")
+    <link href="~/Content/css/grey.css" id="style_color" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/js/lib/chosen/chosen.css")
+    <!-- END THEME STYLES -->
+    @Styles.Render("~/Content/css/custom.css")
+    <link rel="shortcut icon" href="" type="image/png">
+</head>
+<body class="page-md login">
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <!-- END SIDEBAR TOGGLER BUTTON -->
+    <!-- BEGIN LOGO -->
+    <div class="logo" style="margin-top:20px !important">
+        <a href="@Url.Action("Index","Home")" style="text-decoration:none;">
+            <h1 id="logo_desc" class="logo-default" style="font-size:50px">Up Finanças</h1>
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content" style="margin: 0px auto 10px auto;">
+        <!-- BEGIN LOGIN FORM -->
+        @RenderBody()
+        <div class="row">
+            @if (TempData["ERRO"] != null)
+            {
+                <br />
+                                    <div class="alert alert-danger">
+                                        <span>@TempData["ERRO"]</span>
+                                    </div>
+            }
+
+            @if (TempData["SUCESSO"] != null)
+            {
+                <br />
+                                    <div class="alert alert-info">
+                                        <span>@TempData["SUCESSO"]</span>
+                                    </div>
+            }
+        </div>  
+    </div>
+    <div class="copyright">
+        Up Finanças @(DateTime.Now.Year) &copy;
+    </div>
+   
+    @Scripts.Render("~/Content/js/lib/jquery.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery-migrate.min.js")
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    @Scripts.Render("~/Content/js/lib/jquery-ui.min.js")
+    @Scripts.Render("~/Content/js/lib/bootstrap.min.js")
+    @Scripts.Render("~/Content/js/lib/bootstrap-hover-dropdown.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery.slimscroll.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery.blockui.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery.cokie.min.js")
+    <!--DataTables-->
+    @Scripts.Render("~/Content/js/lib/datatables/media/js/jquery.dataTables.min.js")
+    @Scripts.Render("~/Content/js/lib/datatables/extensions/ColReorder/js/dataTables.colReorder.min.js")
+    @Scripts.Render("~/Content/js/lib/datatables/extensions/Scroller/js/dataTables.scroller.min.js")
+    @Scripts.Render("~/Content/js/lib/datatables/plugins/bootstrap/dataTables.bootstrap.js")
+    @Scripts.Render("~/Content/js/lib/datatables/plugins/date-eu.js")
+    @Scripts.Render("~/Content/js/lib/datatables/plugins/order-values.js")
+    <!--Validations-->
+    @Scripts.Render("~/Content/js/lib/jquery-validate/jquery.validate.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery-validate/additional-methods.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery-validate/messages_pt_BR.min.js")
+    @Scripts.Render("~/Content/js/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js")
+    @Scripts.Render("~/Content/js/lib/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js")
+
+    <!--Mascara-->
+    @Scripts.Render("~/Content/js/lib/chosen/chosen.jquery.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery-inputmask/jquery.inputmask.bundle.min.js")
+    @Scripts.Render("~/Content/js/lib/jquery-inputmask/inputmask/inputmask.date.extensions.min.js")
+
+    @Scripts.Render("~/Content/js/lib/metronic.js")
+    @Scripts.Render("~/Content/js/lib/layout.js")
+    <!-- END CORE PLUGINS -->
+</body>
+
+</html>

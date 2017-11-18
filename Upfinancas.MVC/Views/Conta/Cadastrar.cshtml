@@ -1,0 +1,69 @@
+﻿@model Upfinancas.MVC.ViewModel.ContaViewModel
+
+@{
+    ViewBag.Title = "Contas - Cadastrar";
+}
+<h3 class="page-title">Nova Conta</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Conta")">Contas</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            Nova Conta
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa  fa-plus"></i> Nova Conta
+                </div>
+            </div>
+            <div class="portlet-body form">
+                @using (Html.BeginForm("Cadastrar", "Conta", FormMethod.Post, new {@id = "form1", @class = "form-horizontal"}))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                Conta: <span class="text-danger">* </span>
+                            </label>
+                            <div class="col-md-4 col-sm-5 col-xs-11">
+                                @Html.EditorFor(model => model.Nome, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.Nome, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12">
+                                Conta Padrão?:
+                            </label>
+                            <div class="col-md-4 col-sm-5 col-xs-11">
+                                @Html.CheckBoxFor(model => model.PadraoCheck, new {htmlAttributes = new {@class = "form-control"}})
+
+                                @Html.ValidationMessageFor(model => model.PadraoCheck, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn green">Salvar</button>
+                                @Html.ActionLink("Volta", "Index", "Conta", null, new {@class = "btn default"})
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

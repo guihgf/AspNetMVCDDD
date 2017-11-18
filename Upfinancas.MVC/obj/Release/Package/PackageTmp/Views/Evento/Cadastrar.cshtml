@@ -1,0 +1,226 @@
+﻿@model Upfinancas.MVC.ViewModel.EventoViewModel
+@{
+    ViewBag.Title = "Eventos";
+}
+<h3 class="page-title">
+    Eventos <small>lançamentos</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index", "Evento")">Eventos</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            Novo Lançamento
+        </li>
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Cadastrar", "Evento", FormMethod.Post, new { @id = "form1", @onsubmit= "return desmascararValor();" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="portlet box grey-cascade">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa  fa-plus"></i> Cadastrar Evento
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="form-body form-vertical">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Evento: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Conta: <span class="text-danger">*</span>
+                                        </label>
+                                        @Html.DropDownListFor(model => model.ContaId, Model.Contas, null, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Tipo:  <span class="text-danger">*</span>
+                                        </label>
+                                        @Html.DropDownListFor(model => model.Tipo, Model.Tipos, null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Valor Total: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control valor_monetario" } })
+                                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Valor em Juros: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.ValorJuros, new { htmlAttributes = new { @class = "form-control valor_monetario" } })
+                                        @Html.ValidationMessageFor(model => model.ValorJuros, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Valor em Desconto: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.ValorDesconto, new { htmlAttributes = new { @class = "form-control valor_monetario" } })
+                                        @Html.ValidationMessageFor(model => model.ValorDesconto, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Data de Lançamento: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.DataLancamento,new { htmlAttributes = new { @class = "form-control"} })
+                                        @Html.ValidationMessageFor(model => model.DataLancamento, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div id="DataVencimentoDiv" class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Data de Vencimento: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.DataVencimento, new { htmlAttributes = new { @class = "form-control "} })
+                                        @Html.ValidationMessageFor(model => model.DataVencimento, "", new { @class = "text-danger "})
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Data de Pagamento: 
+                                        </label>
+                                        @Html.EditorFor(model => model.DataPagamento, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DataPagamento, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Forma de pagamento/recebimento:<span class="text-danger">*</span>
+                                        </label>
+                                        @Html.DropDownListFor(model => model.FormaId, (IEnumerable<SelectListItem>)Model.Formas, new { @class = "form-control" })
+                                    </div>
+
+                                    @if (Model.Pessoas!=null)
+                                    {
+                                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                            <label>
+                                                Fonte do Evento:
+                                            </label>
+                                            @Html.DropDownListFor(model => model.PessoaId, (IEnumerable<SelectListItem>)Model.Pessoas, string.Empty, new { @class = "form-control" })
+                                        </div>
+                                
+                                    }
+                                    @if (Model.Categorias != null)
+                                    {
+                                        <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                                            <label>
+                                                Categoria:
+                                            </label>
+                                            @Html.DropDownListFor(model => model.CategoriaId, (IEnumerable<SelectListItem>)Model.Categorias, string.Empty, new { @class = "form-control" })
+                                        </div>
+
+                                    }
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        <label>
+                                            Observações:
+                                        </label>
+                                        @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control",@rows="3" })
+                                        @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn green">Salvar</button>
+                                        @Html.ActionLink("Volta", "Index", "Evento", null, new { @class = "btn default" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Pessoa -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var Inside = function () {
+        var handleDataVencimento = function () {
+            if ($('#Tipo').val() == 2)
+                $("#DataVencimentoDiv").addClass('hide');
+
+            $('#Tipo').change(function () {
+                if ($(this).val() == 2)
+                    $("#DataVencimentoDiv").addClass('hide');
+                else
+                    $("#DataVencimentoDiv").removeClass('hide');
+            });
+        };
+        var handleMaskCampos = function () {
+            $('.valor_monetario').priceFormat({
+                prefix: '',
+                centsSeparator: ',',
+                thousandsSeparator: '.'
+            });
+        };
+        var handleCategoriasPorTipo = function () {
+            $('#Tipo').change(function () {
+                $("#CategoriaId").html("");
+                $("#CategoriaId").append("<option></option>");
+                $.get('../Categoria/ListaPorTipo?tipo=' + $(this).val(), function (data) {
+                    $.each($.parseJSON(data), function (i, item) {
+                        $("#CategoriaId").append(
+                           $("<option />")
+                               .attr("value", item.Id)
+                               .text(item.Nome));
+                    });
+                });
+            });
+        }
+        return {
+            init: function () {
+                handleDataVencimento();
+                handleMaskCampos();
+                handleCategoriasPorTipo();
+            }
+        };
+    }();
+</script>

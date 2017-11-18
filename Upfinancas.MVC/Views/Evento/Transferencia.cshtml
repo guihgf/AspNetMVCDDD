@@ -1,0 +1,114 @@
+﻿@model Upfinancas.MVC.ViewModel.TransferenciaViewModel
+@{
+    ViewBag.Title = "Transferência";
+}
+<h3 class="page-title">
+    Tranferência <small>lançar</small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Index","Home")">Home</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@Url.Action("Transferência", "Evento")">Eventos</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            Nova Transferência
+        </li>
+    </ul>
+
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @using (Html.BeginForm("Transferencia", "Evento", FormMethod.Post, new { @id = "form1", @onsubmit = "return desmascararValor();" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="portlet box grey-cascade">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa  fa-plus"></i> Nova Transferência
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="form-body form-vertical">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            De: <span class="text-danger">*</span>
+                                        </label>
+                                        @Html.DropDownListFor(model => model.ContaSaidaId, Model.ContasSaida, null, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Para:  <span class="text-danger">*</span>
+                                        </label>
+                                        @Html.DropDownListFor(model => model.ContaEntradaId, Model.ContasEntrada, null, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ContaEntradaId, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Data de Lançamento: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.DataLancamento, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.DataLancamento, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-12 form-group">
+                                        <label>
+                                            Valor Total: <span class="text-danger">* </span>
+                                        </label>
+                                        @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control valor_monetario" } })
+                                        @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                           
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        <label>
+                                            Observações:
+                                        </label>
+                                        @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control", @rows = "3" })
+                                        @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="submit" class="btn green">Salvar</button>
+                                        @Html.ActionLink("Voltar", "Index", "Evento", null, new { @class = "btn default" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var Inside = function () {
+        var handleMaskCampos = function () {
+            $('.valor_monetario').priceFormat({
+                prefix: '',
+                centsSeparator: ',',
+                thousandsSeparator: '.'
+            });
+        };
+
+        return {
+            init: function () {
+                handleMaskCampos();
+            }
+        };
+    }();
+</script>

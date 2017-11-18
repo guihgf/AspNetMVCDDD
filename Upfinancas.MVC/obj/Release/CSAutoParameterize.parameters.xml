@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="UpFinancasContext-Web.config Connection String" description="UpFinancasContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=.\SQLEXPRESS;Initial Catalog=upfinancas;User ID=sa;Password=32324424" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\guihgf\\Source\\Repos\\up_net\\Upfinancas\.MVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='UpFinancasContext']/@connectionString" />
+  </parameter>
+  <parameter name="UpFinancasContext_DatabasePublish-Web.config Connection String" description="UpFinancasContext_DatabasePublish Connection String used in web.config by the application to access the database." defaultValue="UpFinancasContext_DatabasePublish.ConnetionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\guihgf\\Source\\Repos\\up_net\\Upfinancas\.MVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='UpFinancasContext_DatabasePublish']/@connectionString" />
+  </parameter>
+</parameters>

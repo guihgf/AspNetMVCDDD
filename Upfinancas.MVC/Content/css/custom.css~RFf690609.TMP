@@ -1,0 +1,51 @@
+.loading{
+	background-image: url("../img/loading_grande.gif");
+	background-position: center center;
+	background-size:50px 50px ;
+	background-repeat: no-repeat;
+	min-height: 50px;
+	min-width: 50px;
+}
+/*td {font-size:10px}*/
+.table_export{
+	font-size:10px
+}
+
+/* headers data table*/
+.table_export > .dataTable > thead > tr > th.sorting, .dataTable > thead > tr > th.sorting_asc, .dataTable > thead > tr > th.sorting_desc {
+	padding-right: 0px;
+}
+
+.table-scrollable > .table > thead > tr > th, .table-scrollable > .table > tbody > tr > th, .table-scrollable > .table > tfoot > tr > th, .table-scrollable > .table > tfoot > tr > th, .table-scrollable > .table > tfoot > tr > td {
+	text-align: center;
+	white-space: normal;
+}
+
+.table_export > .table thead tr th {
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.field-validation-error{
+    color:red
+}
+
+
+@font-face {
+  font-family: "Master_Of_Break";
+  src: url(master_of_break.ttf) format("truetype");
+}
+
+#logo_desc { 
+  font-family: "Master_Of_Break", sans-serif;
+  color:#ffffff;
+  font-size: 27px;
+  font-style: italic;
+  
+}
+#logo_desc_2{ 
+  font-family: "Master_Of_Break", sans-serif;
+  color:#ffffff;
+  font-size: 20px;
+  font-style: italic; 
+}

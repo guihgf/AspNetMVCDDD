@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Início";
+    ViewBag.LinkHome=true;
+    
+}
+
+<h3 class="page-title">Home</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            Home
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet box">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="ch_calendario">Selecione uma conta:</label>
+                                <select id="ch_calendario" name="ch_calendario" class="form-control" data-placeholder="Selecione a conta..."></select>
+                            </div>
+                            <div class="col-md-8">
+                                <span class="label label-success">Receitas</span>
+                                <span class="label label-warning">Despesas em aberto</span>
+                                <span class="label label-danger">Despesas já vencidas</span>
+                                <span class="label label-primary">Despesas Pagas </span>
+                            </div>
+                        </div>
+                        <br/>
+                        <div id="calendar"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var Inside = function () {
+        var handleCalendar=function(){
+            $('#calendar').fullCalendar({
+                lang: 'pt-br',
+                header: {
+
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: [],
+                editable: false,
+                eventLimit: true,
+                eventClick: function (calEvent, jsEvent, view) {
+
+     
+                window.location.assign("../Evento/Editar?eventoId=" + calEvent.id);
+                 
+                }
+            });
+            function get_agenda_lancamentos(conta) {
+                $.get('../Evento/ListarEventosPorConta?contaId=' + conta, function (data) {
+
+                    $('#calendar').fullCalendar('removeEvents');
+                    var i = 0;
+                    var eventos = data;
+                    $.each(eventos, function (i, item) {
+                        var cor = "";
+                        var data = new Date();
+                        if (item.Tipo == 1) {
+                            cor = "#00BCD4";
+                        }
+                        else {
+                            cor = "#26A69A";
+                        }
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth() + 1; //January is 0!
+                        var yyyy = today.getFullYear();
+
+                        if (dd < 10) {
+                            dd = '0' + dd
+                        }
+
+                        if (mm < 10) {
+                            mm = '0' + mm
+                        }
+
+                        today = yyyy + '-' + mm + '-' + dd;
+                        //despesas vencidas
+                        if (item.DataPagamento == null && item.DataVencimento < today) {
+                            cor = "#F3565D";
+                        }
+                        //despesas abertas
+                        if (item.DataPagamento == null && item.DataVencimento >= today) {
+                            cor = "#ff5722";
+                        }
+
+
+                        var eventObject = {
+                            title: item.Descricao.replace(/&ordf;/g, 'ª'),
+                            start: item.DataVencimento,
+                            allDay: true,
+                            id: item.Id,
+                            backgroundColor: cor,
+                            tipo: item.Tipo
+                        };
+
+                        $('#calendar').fullCalendar('renderEvent', eventObject, true);
+                        //return eventObject;
+
+                    });
+                    $('#calendar').fullCalendar('refetchEvents');
+
+                },'json');
+
+            }
+            $.get('../Conta/ListarAtivas', function (data) {
+                var i = 0;
+
+                $.each(data, function (i, item) {
+                    $('#ch_calendario').append($('<option>', {
+                        value: item.Id,
+                        text: item.Nome
+                    }));
+                });
+
+                //carrega lançamentos com o primeiro elemento, ou seja, a conta padrão
+                get_agenda_lancamentos($("#ch_calendario").val());
+
+            }, 'json');
+
+            $("#ch_calendario").change(function () {
+                get_agenda_lancamentos($("#ch_calendario").val());
+            });
+        }
+        return {
+            init: function () {
+                handleCalendar();
+                
+            }
+        };
+    }();
+</script>

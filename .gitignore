@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/packages
+/UpFinancas.Util/obj/Debug
+/UpFinancas.Util/bin/Debug
+/Upfinancas.MVC/obj/Debug
+/Upfinancas.MVC/bin
+/UpFinancas.Infra.Data/obj/Debug
+/UpFinancas.Infra.Data/bin/Debug
+/UpFinancas.Infra.CrossCutting/obj/Debug
+/UpFinancas.Infra.CrossCutting/bin/Debug
+/UpFinancas.Domain/obj/Debug
+/UpFinancas.Domain/bin/Debug
+/UpFinancas.App/obj/Debug
+/UpFinancas.App/bin/Debug
+/.vs/UpFinancas/v15/Server/sqlite3

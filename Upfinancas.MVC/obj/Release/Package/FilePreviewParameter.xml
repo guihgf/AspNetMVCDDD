@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="guihgf-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\ghenrique\.AUSTA\\Source\\Repos\\up\\Upfinancas\.MVC\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\ghenrique\.AUSTA\\Source\\Repos\\up\\Upfinancas\.MVC\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="UpFinancasContext-Web.config Connection String" description="" value="&quot;Data Source=SQL5017.Smarterasp.net;Initial Catalog=DB_9FB0E3_up;User Id=DB_9FB0E3_up_admin;Password=passoka24;&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\ghenrique\.AUSTA\\Source\\Repos\\up\\Upfinancas\.MVC\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='UpFinancasContext']/@connectionString" />
+  </parameter>
+</parameters>
